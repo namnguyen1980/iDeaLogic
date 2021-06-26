@@ -4,7 +4,6 @@ import { LoginPage } from '../../Pages/login.page';
 
 describe('Test Login page:', function () {
 
-  let until = ExpectedConditions;
   let loginPage = new LoginPage();
 
   // parameters
@@ -14,9 +13,6 @@ describe('Test Login page:', function () {
   let invalidPassword = "admin123456";
   let validUsername = "admin@yopmail.com";
   let validPassword = "admin123";
-
-  // Timing
-  var maxTime: number = 500;
 
   beforeAll(() => {
     browser.get('/');
