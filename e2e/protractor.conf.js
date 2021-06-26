@@ -20,7 +20,7 @@ exports.config = {
         "browserName": "chrome",        
         shardTestFiles: true,
         maxInstances: 2,
-        specs: ['student.crud.spec.js', 'student.list.spec.js', 'login.spec.js']
+        specs: ['studentlist.spec.js', 'login.spec.js']
     },
     {
         "browserName": "firefox",
@@ -36,7 +36,7 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 50000,
-    print: function () { }
+    print: function() {}
   },
   onPrepare() {
     browser.driver.manage().window().maximize();
