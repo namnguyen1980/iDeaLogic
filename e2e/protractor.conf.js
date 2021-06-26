@@ -10,6 +10,9 @@ exports.config = {
   ],
   capabilities: {
     'browserName': 'chrome',
+    shardTestFiles: true,
+    maxInstances: 2,
+    specs: ['login.spec.js', 'login.spec.js', 'login.spec.js', 'login.spec.js']
   },
   /*
   multiCapabilities: [
