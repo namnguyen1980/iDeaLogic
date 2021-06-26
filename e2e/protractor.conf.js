@@ -10,17 +10,26 @@ exports.config = {
   ],
   capabilities: {
     'browserName': 'chrome',
-    shardTestFiles: true,
-    maxInstances: 2,
-    specs: ['login.spec.js', 'login.spec.js', 'login.spec.js', 'login.spec.js']
   },
+  // run multi-threaded
   /*
+  capabilities: {
+    'browserName': 'chrome',
+    chromeOptions: {
+      args: ['--start-maximized']
+    },
+    shardTestFiles: true,
+    maxInstances: 3,
+  },
+  */
+  /*
+  // run multi-threaded, multi-browser
   multiCapabilities: [
     {
         "browserName": "chrome",        
         shardTestFiles: true,
         maxInstances: 2,
-        specs: ['studentlist.spec.js', 'login.spec.js']
+        specs: ['student.crud.spec.js', 'student.list.spec.js', 'login.spec.js']
     },
     {
         "browserName": "firefox",
@@ -29,14 +38,13 @@ exports.config = {
     },
 ],
 */
-
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 50000,
-    print: function() {}
+    print: function () { }
   },
   onPrepare() {
     browser.driver.manage().window().maximize();
