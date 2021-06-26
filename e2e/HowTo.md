@@ -9,10 +9,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
  * Nodejs      v10.13.0
  * npm         v7.12.1
  * Angular/CLI v9.0.7
- * WebDriver   v7.1-7.5
- 
- - npm install --save-dev @types/jasmine
- - npm install chromedriver
 
 ## Build
 
@@ -21,6 +17,10 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 Use the `ng build --prod` flag for a production build.
 
 ## Run
+
+ - npm install
+ - npm install protractor
+ - npm install webdriver-manager
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
