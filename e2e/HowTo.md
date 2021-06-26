@@ -10,6 +10,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
  * npm         v7.12.1
  * Angular/CLI v9.0.7
  * WebDriver   v7.1-7.5
+ 
+ - npm install --save-dev @types/jasmine
+ - npm install chromedriver
 
 ## Build
 
