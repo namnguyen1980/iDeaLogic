@@ -41,11 +41,12 @@ describe('Test CRUD on Student page:', function () {
 
     describe('When on Student list page, user clicks on add new user:', function () {
         it('should be able to see Add new user page and Register button is unclickable', () => {
-            // click on Add New User
-
+            // expect when launch student page and count number students on table
             expect(studentPage.getNavSideBarElement().isElementPresent).toBeTruthy();
             expect(studentPage.getTableStudentList().isElementPresent).toBeTruthy();
             original_number = studentPage.getTableStudentList().count;
+
+            // click on Add New User
             expect(studentPage.clickAddNewUser());
 
             // expect
@@ -76,27 +77,27 @@ describe('Test CRUD on Student page:', function () {
             });
 
             it('should be able to clear error messages for valid fields and Register button is clickable', () => {
-                // input invalid value for first name
+                // input valid value for first name
                 studentPage.clearStudentFirstName();
                 studentPage.setStudentFirstName(add_first_name);
 
-                // input invalid value for last name
+                // input valid value for last name
                 studentPage.clearStudentLastName();
                 studentPage.setStudentLastName(add_last_name);
 
-                // input invalid value for email
+                // input valid value for email
                 studentPage.clearStudentEmail;
                 studentPage.setStudentEmail(add_email_address);
 
-                // update onvalid for phone
+                // update valid for phone
                 studentPage.clearStudentPhone();
                 studentPage.setStudentPhone(add_phone_number);
 
                 // expect
-                expect(studentPage.isInvalidStudentFirstNameWarningExisted());
-                expect(studentPage.isInvalidStudentLastNameWarningExisted());
-                expect(studentPage.isInvalidStudentEmailWarningExisted());
-                expect(studentPage.isInvalidStudentPhoneWarningExisted());
+                expect(studentPage.InvalidStudentFirstNameWarningNotPresent());
+                expect(studentPage.InvalidStudentLastNameWarningShouldNotPresent());
+                expect(studentPage.InvalidStudentEmailWarningShouldNotPresent());
+                expect(studentPage.InvalidStudentPhoneWarningShouldNotPresent());
                 expect(studentPage.getRegisterButtonElement().toBeEnabled);
             });
         });
@@ -129,15 +130,18 @@ describe('Test CRUD on Student page:', function () {
 
         describe('When on Student update page, user enters invalid values:', function () {
             it('should be able to see error messages for email already in use', () => {
+                // a lot of toasts make the Update button sometimes failed to click
+                // so it's better as we step a while to wait last toast removed from DOM
+                studentPage.WaitToastStudentSuccessfullyAddedNotPresent();
+
                 // click Update button
                 studentPage.clickUpdateStudentDetail();
 
-                // expec
+                // expect
                 expect(studentPage.getStudentEmailAlreadyInUseElement().isElementPresent).toBeTruthy();
             });
 
             it('should be able to see error messages for all fields and update button is unclickable', () => {
-                expect(studentPage.getStudentDetailUpdateElement().isElementPresent).toBeTruthy();
                 // update first name with invalid value
                 studentPage.clearStudentFirstName();
                 studentPage.setStudentFirstName("a");
@@ -203,7 +207,7 @@ describe('Test CRUD on Student page:', function () {
                 // expect
                 expect(studentPage.getTableStudentList().count == original_number + 1);
                 expect(studentPage.getStudentNameOnStudentList(update_first_name).isElementPresent).toBeTruthy();
-                expect(studentPage.isStudentNameOnStudentListExisted(add_first_name));
+                expect(studentPage.StudentNameOnStudentListShouldNotPresent(add_first_name));
             });
         });
     });
@@ -221,9 +225,9 @@ describe('Test CRUD on Student page:', function () {
             expect(studentPage.getPageStudentListElement().isElementPresent).toBeTruthy();
             expect(studentPage.getTableStudentList().count == original_number + 1);
             expect(studentPage.getStudentNameOnStudentList(update_first_name).isElementPresent).toBeTruthy();
-            
+
         });
-        
+
         it('should be able to delete and user is removed on Student list table', () => {
             // delete an user
             expect(studentPage.clickDeleteStudentByName(update_first_name));
@@ -235,8 +239,7 @@ describe('Test CRUD on Student page:', function () {
             // expect
             expect(studentPage.getPageStudentListElement().isElementPresent).toBeTruthy();
             expect(studentPage.getTableStudentList().count == original_number);
-            expect(studentPage.isStudentNameOnStudentListExisted(update_first_name));          
+            expect(studentPage.StudentNameOnStudentListShouldNotPresent(update_first_name));
         });
     });
 });
-

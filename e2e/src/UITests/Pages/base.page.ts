@@ -3,7 +3,7 @@ import { by, element, ElementFinder, browser, ExpectedConditions } from 'protrac
 export abstract class BasePage {
 
     // timeout
-    private maxTime: number = 1000;
+    private maxTime: number = 2000;
 
     // StringFormat built-in function
     private StringFormat = (str: string, ...args: string[]) =>
@@ -48,14 +48,6 @@ export abstract class BasePage {
         element(by.css(locator)).clear();
     }
 
-    isElementExistedByCss(locator: string) {
-        return expect(element(by.css(locator)).isPresent()).toBe(false);
-    }
-
-    isElementExistedByXpath(locator: string) {
-        return expect(element(by.xpath(locator)).isPresent()).toBe(false);
-    }
-
     // clicks on element by Css
     clickOnElementByCss(locator: string) {
         browser.wait(ExpectedConditions.elementToBeClickable(element(by.css(locator))), this.maxTime);
@@ -75,8 +67,25 @@ export abstract class BasePage {
         element(by.xpath(updateLocator)).click();
     }
 
-    isElementExistedByCustomeXpath(locator: string, partialText: string) {
+    // To verify element not present
+    // element by css should not be presented
+    ElementByCssShouldNotPresent(locator: string) {
+        return expect(element(by.css(locator)).isPresent()).toBe(false);
+    }
+
+    // element by xpath should not be presented
+    ElementByXpathShouldNotPresent(locator: string) {
+        return expect(element(by.xpath(locator)).isPresent()).toBe(false);
+    }
+
+    // element by custom xpath should not be presented
+    ElementByCustomXpathShouldNotPresent(locator: string, partialText: string) {
         const updateLocator = this.StringFormat(locator, partialText);
         return expect(element(by.xpath(locator)).isPresent()).toBe(false);
+    }
+
+    // wait for element removed from DOM
+    WaitForElementRemoved(locator:string){
+        return browser.wait(ExpectedConditions.not(ExpectedConditions.presenceOf(element(by.css(locator)))));
     }
 }
