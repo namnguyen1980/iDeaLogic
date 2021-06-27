@@ -43,7 +43,7 @@ describe('Test listing, seraching and detailing on Student page:', function () {
             studentListPage.setTxtSearch("abcd");
 
             // expect
-            expect(studentListPage.isTableStudentListNotExisted());
+            expect(studentListPage.TableStudentListShouldNotPresent());
 
             // clear searching
             studentListPage.clearTxtSearch();

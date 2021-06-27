@@ -14,7 +14,7 @@ export class StudentPage extends BasePage {
     private txtStudentPhoneDetail: string;
     private btnBackStudentDetail: string;
     private btnEditStudentDetail: string;
-    private pageStudentUpdate: string;
+    private formStudentUpdate: string;
     private rowStudentName: string;
 
     private btnStudentDetailUpdate: string;
@@ -57,7 +57,7 @@ export class StudentPage extends BasePage {
         this.btnStudentUpdateBack = '//a[normalize-space()="Back"]';
         this.btnBackStudentDetail = '//button[normalize-space()="Back"]';
         this.btnEditStudentDetail = '//button[text() = " Edit"]';
-        this.pageStudentUpdate = '//span[normalize-space()="Student Update"]';
+        this.formStudentUpdate = '//form[@ng-reflect-form="[object Object]"]';
 
         // using Xpath to allow to click on any student with name
         this.rowStudentName = '//td[normalize-space()="{0}"]';
@@ -117,8 +117,8 @@ export class StudentPage extends BasePage {
     }
 
     // checks if student list table is gone
-    isTableStudentListNotExisted() {
-        this.isElementExistedByCss(this.tableStudentList);
+    TableStudentListShouldNotPresent() {
+        this.ElementByCssShouldNotPresent(this.tableStudentList);
     }
 
     // clicks on student record by student name
@@ -132,8 +132,8 @@ export class StudentPage extends BasePage {
     }
 
     // is specific student by name existed
-    isStudentNameOnStudentListExisted(studentName: string) {
-        return this.isElementExistedByCustomeXpath(this.rowStudentName, studentName);
+    StudentNameOnStudentListShouldNotPresent(studentName: string) {
+        return this.ElementByCustomXpathShouldNotPresent(this.rowStudentName, studentName);
     }
 
     // list functions
@@ -174,7 +174,7 @@ export class StudentPage extends BasePage {
 
     // returns student detail update
     getStudentDetailUpdateElement(): ElementFinder {
-        return this.getElementByXpath(this.pageStudentUpdate);
+        return this.getElementByXpath(this.formStudentUpdate);
     }
 
     // clicks update on student update
@@ -187,6 +187,7 @@ export class StudentPage extends BasePage {
         this.clickOnElementByXpath(this.btnStudentUpdateBack);
     }
 
+    // returns Update button for detail
     getButtonUpdateStudentElement(): ElementFinder {
         return this.getElementByXpath(this.btnStudentDetailUpdate);
     }
@@ -268,8 +269,8 @@ export class StudentPage extends BasePage {
     }
 
     // Student fist name warning element should be gone
-    isInvalidStudentFirstNameWarningExisted() {
-        return this.isElementExistedByXpath(this.txtInvalidStudentFirstNameWarning);
+    InvalidStudentFirstNameWarningNotPresent() {
+        return this.ElementByXpathShouldNotPresent(this.txtInvalidStudentFirstNameWarning);
     }
 
     // returns Student fist name warning element
@@ -278,8 +279,8 @@ export class StudentPage extends BasePage {
     }
 
     // Student last name warning element should be gone
-    isInvalidStudentLastNameWarningExisted() {
-        return this.isElementExistedByXpath(this.txtInvalidStudentLastNameWarning);
+    InvalidStudentLastNameWarningShouldNotPresent() {
+        return this.ElementByXpathShouldNotPresent(this.txtInvalidStudentLastNameWarning);
     }
 
     // returns Student email warning element
@@ -288,8 +289,8 @@ export class StudentPage extends BasePage {
     }
 
     // Student email warning element should be gone
-    isInvalidStudentEmailWarningExisted() {
-        return this.isElementExistedByXpath(this.txtInvalidStudentEmailWarning);
+    InvalidStudentEmailWarningShouldNotPresent() {
+        return this.ElementByXpathShouldNotPresent(this.txtInvalidStudentEmailWarning);
     }
 
     // returns Student phone warning element
@@ -298,13 +299,18 @@ export class StudentPage extends BasePage {
     }
 
     // Student phone warning element should be gone
-    isInvalidStudentPhoneWarningExisted() {
-        return this.isElementExistedByXpath(this.txtInvalidStudentPhoneWarning);
+    InvalidStudentPhoneWarningShouldNotPresent() {
+        return this.ElementByXpathShouldNotPresent(this.txtInvalidStudentPhoneWarning);
     }
 
     // returns toast student successfully added
     getStudentSuccessfullyAddedElement(): ElementFinder {
         return this.getElementByCss(this.toastStudentSuccessfullyAdded);
+    }
+
+    // wait for toast removed
+    WaitToastStudentSuccessfullyAddedNotPresent(){
+        this.WaitForElementRemoved(this.toastStudentSuccessfullyAdded);
     }
 
     // clicks on Update by student name

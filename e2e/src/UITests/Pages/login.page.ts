@@ -107,20 +107,20 @@ export class LoginPage extends BasePage{
     return this.getElementByCss(this.successCredential);
   }
 
+  // Email warning element should be gone
+  EnterValidEmailErrorShouldNotPresent() {
+    this.ElementByCssShouldNotPresent(this.usernameErrorFormat);
+  }
+
+  // Password warning element should be gone
+  EnterValidPasswordErrorShouldNotPresent() {
+    this.ElementByCssShouldNotPresent(this.passwordErrorFormat);
+  }
+
   // login built-in
   logIn() {
     this.setTxtUsername(this.defaultUsername);
     this.setTxtPassword(this.defaultPassword);
     this.clickBtnLogin();
-  }
-
-  // Email warning element should be gone
-  isEnterValidEmailErrorExisted() {
-    this.isElementExistedByCss(this.usernameErrorFormat);
-  }
-
-  // Password warning element should be gone
-  isEnterValidPasswordErrorExisted() {
-    this.isElementExistedByCss(this.passwordErrorFormat);
   }
 }
