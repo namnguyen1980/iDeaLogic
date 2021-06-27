@@ -39,6 +39,9 @@ export class StudentPage extends BasePage {
     private btnStudentUpdate: string;
     private btnStudentDelete: string;
 
+    // LogOut
+    private linkLogOut: string;
+
     // Declare Elements
     constructor() {
         super();
@@ -81,6 +84,9 @@ export class StudentPage extends BasePage {
         this.btnStudentUpdate = '//td[normalize-space()="{0}"]/../td/button[normalize-space()="Update"]';
         this.btnStudentDelete = '//td[normalize-space()="{0}"]/../td/button[normalize-space()="Delete"]';
         this.btnStudentDetailUpdate = '//button[@type="submit"]';
+
+        // logout element
+        this.linkLogOut = '//a[normalize-space()="Logout"]';
 
     }
 
@@ -309,5 +315,11 @@ export class StudentPage extends BasePage {
     // clicks on Delete by student name
     clickDeleteStudentByName(name: string) {
         this.clickOnElementByCustomXpath(this.btnStudentDelete, name);
+    }
+
+    // Logout Functions
+    // clicks on Logout link
+    clickLogOutlink(){
+        this.clickOnElementByXpath(this.linkLogOut);
     }
 }

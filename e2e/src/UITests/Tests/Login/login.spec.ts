@@ -1,10 +1,12 @@
-import { ExpectedConditions, browser } from 'protractor';
+import { browser } from 'protractor';
 import { LoginPage } from '../../Pages/login.page';
+import { StudentPage } from '../../Pages/student.page';
 
 
 describe('Test Login page:', function () {
 
   let loginPage = new LoginPage();
+  let studentPage = new StudentPage();
 
   // parameters
   let wrongFormatUsername = "abc";
@@ -73,6 +75,14 @@ describe('Test Login page:', function () {
   describe('When on Login page, user enters the correct username and password are entered:', function () {
     it('should be able to login successfully and go to Student list page', () => {
       loginPage.logIn();
+      expect(loginPage.getSuccessCredential().isElementPresent).toBeTruthy();
+    });
+  });
+
+  describe('When on Student page, user clicks on Logout link:', function () {
+    it('should be able to logout successfully and go to Login page', () => {
+      studentPage.clickLogOutlink();
+      expect(loginPage.getBoxLogin().isElementPresent).toBeTruthy();
       expect(loginPage.getSuccessCredential().isElementPresent).toBeTruthy();
     });
   });
